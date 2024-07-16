@@ -1,0 +1,141 @@
+
+.ttt{
+  border: 4px solid rgba(101,237,61,0.93);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.test{
+  border-bottom:4px solid rgba(101,237,61,0.93);
+  border-radius: 1px;
+}
+.scr-menu::-webkit-scrollbar{
+  display: none;
+}
+.card-body{
+  animation-name: rex;
+animation-duration: 2s;
+animation-delay: 1s;
+animation-iteration-count: infinite;
+}
+@keyframes rex{
+  
+  to{
+    /*transform:rotate(360deg);*/
+    width: 95%;
+    background: yellow;
+  }
+}
+.cae{
+  animation-name: tra;
+animation-duration:0.4s;
+animation-fill-mode: forward;
+animation-timing-function: ease-in;
+transform: translateX(0%);
+}
+@keyframes tra{
+  0%{
+    transform: translateX(-100%);
+  }
+  50%{
+    transform: translateX(-75%)
+  }
+  75%{
+    transform: translateX(-40%)
+  }
+  100%{
+    /*transform:rotate(360deg);*/
+    transform: translateX(0%);
+  }
+}
+
+.caeOut{
+  animation-name: eOut;
+  animation-fill-mode: backward;
+animation-duration:0.4s;
+animation-timing-function: ease-out;
+transform: translateX(-110%);
+}
+@keyframes eOut{
+  0%{
+    transform: translateX(0%);
+  }
+  50%{
+    transform: translateX(-55%)
+  }
+  75%{
+    transform: translateX(-75%)
+  }
+  100%{
+    /*transform:rotate(360deg);*/
+    transform: translateX(-110%);
+  }
+}
+
+.formAnimation{
+  animation-name: formIn;
+  animation-fill-mode: forward;
+animation-duration:0.5s;
+animation-timing-function: ease-in;
+/*transform: translateY(-110%);*/
+height: 400px;
+}
+@keyframes formIn{
+  0%{
+ /*  transform: translateY(-110%);*/
+    height: 10px;
+  }
+  50%{
+   /* transform: translateY(-65%);*/
+    height: 300px;
+  }
+ /* 75%{
+   transform: translateY(-35%);
+    height: 300px;
+  }*/
+  100%{
+    /*transform:rotate(360deg);*/
+    height: 400px;
+    /*transform: translateY(0%);*/
+  }
+}
+
+
+.formAnimOut{
+  animation-name: formOut;
+  animation-fill-mode: backward;
+animation-duration:0.1s;
+animation-timing-function: ease-out;
+height:0px;
+display: none;
+}
+@keyframes formOut{
+  0%{
+ height: 370px;
+ display: block;
+  }
+  50%{
+   height: 200px;
+   display: block;
+  }
+  75%{
+  display: block;
+    height: 70px;
+  }
+  100%{
+    height:0px;
+    display: none;
+  }
+}
+
+.toastBody {
+  font-family: sans-serif;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 2px solid white;
+ 
+}
+.custom-toast{
+ background-color: #d4edda;
+  
+}
