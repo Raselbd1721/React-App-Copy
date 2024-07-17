@@ -90,7 +90,7 @@ const handleSearch=(e)=>{
   
   return clod &&(
     <div className="mx-2 max-w-[400px] box-border bg-gray-200 py-5 mt-14 text-center font-serif pb-10">
-      <h1 className="mb-5">this is Orders page</h1>
+      <h1 className="mb-5 font-bold">this is Orders page</h1>
       <div className="text-center border-2 border-blue-600 border-solid rounded-3xl  shadow-[3px_5px_5px_gray] transform transition ease-in-out duration-500 hover:scale-110 w-[330px] mx-auto">
       <form onSubmit={handleSub}>
 <input type="text" placeholder="Search by User/Invoice etc.." name="search" className="p-2 border-2 border-solid border-gray-200 outline-none rounded-lg my-1 mt-5" value={todo} onChange={(e)=>handleSearch(e)} required />
