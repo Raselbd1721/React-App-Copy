@@ -41,7 +41,7 @@ const handleSearch=(e)=>{
 
   const callApi=async()=>{
     try{
-      const res=await axios.get('https://ecommerce-app-5dnf.onrender.com/products/islogin')
+      const res=await axios.get('http://localhost:3000/products/islogin')
       await setUserData({...res.data.userInfo})
     }catch(error){
       console.log(error)
@@ -49,7 +49,7 @@ const handleSearch=(e)=>{
     }
   const findUser=async()=>{
     try{
-      const userRes=await axios.get('https://ecommerce-app-5dnf.onrender.com/products/islogin')
+      const userRes=await axios.get('http://localhost:3000/products/islogin')
       await setUserData({...userRes.data.userInfo})
       await setID(userRes.data.userInfo.id)
 
@@ -60,7 +60,7 @@ const handleSearch=(e)=>{
 
   const deleteOrder=async(id)=>{
     try{
-      const res=await axios.delete(`https://ecommerce-app-5dnf.onrender.com/products/orders/${id}`)
+      const res=await axios.delete(`http://localhost:3000/products/orders/${id}`)
      await getOrder()
      toast.success(res.data.message)
     }catch(error){
@@ -72,7 +72,7 @@ const handleSearch=(e)=>{
   const getOrder=async()=>{
     try{
       
-   const res=await axios.get(`https://ecommerce-app-5dnf.onrender.com/products/orders?page=${currentPage}&&search=${search}`)
+   const res=await axios.get(`http://localhost:3000/products/orders?page=${currentPage}&&search=${search}`)
    await setOrderData(res.data.allOrder)
    await setTotalPage(res.data.totalPage)
    setClod(true)

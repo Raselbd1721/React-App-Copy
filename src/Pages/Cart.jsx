@@ -37,7 +37,7 @@ const [first,setFirst]=useState(false)
    try{
      
      const newOrder={order:cartData,subTotal:subTotal,userDetails:userData}
-    const res= await axios.post("https://ecommerce-app-5dnf.onrender.com/products/createOrder",newOrder)
+    const res= await axios.post("http://localhost:3000/products/createOrder",newOrder)
      
      
   await dispatch(getOrder(res.data.orderData))
@@ -50,7 +50,7 @@ const [first,setFirst]=useState(false)
  }
    const callApi=async()=>{
     try{
-      const res=await axios.get('https://ecommerce-app-5dnf.onrender.com/products/islogin')
+      const res=await axios.get('http://localhost:3000/products/islogin')
       await setUserData({...res.data.userInfo})
       setClod(true)
     }catch(error){

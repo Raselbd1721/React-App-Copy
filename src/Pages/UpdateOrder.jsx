@@ -45,7 +45,7 @@ const jsData=()=>{
   
   const callApi=async()=>{
     try{
-      const res=await axios.get('https://ecommerce-app-5dnf.onrender.com/products/islogin')
+      const res=await axios.get('http://localhost:3000/products/islogin')
       await setUserData({...res.data.userInfo})
     }catch(error){
       console.log(error)
@@ -56,7 +56,7 @@ const jsData=()=>{
     
     try{
       setIsSuccess(false)
-   const res=await axios.get(`https://ecommerce-app-5dnf.onrender.com/products/singleorder/${id}`)
+   const res=await axios.get(`http://localhost:3000/products/singleorder/${id}`)
 if(res.data){
   setIsSuccess(true)
       await setCart(res.data.singleOrder)
@@ -93,7 +93,7 @@ setClod(true)
           await deleteOrder()
         }
         else{
- const res= await axios.put(`https://ecommerce-app-5dnf.onrender.com/products/orders/${id}`,newOrder)
+ const res= await axios.put(`http://localhost:3000/products/orders/${id}`,newOrder)
     toast.success("Items delete successfully")
         }
    
@@ -107,7 +107,7 @@ setClod(true)
  const UpdateOrder=async()=>{
    try{
      const newOrder={order:test,subTotal:subTotal,userDetails:userData}
-    const res= await axios.put(`https://ecommerce-app-5dnf.onrender.com/products/orders/${id}`,newOrder)
+    const res= await axios.put(`http://localhost:3000/products/orders/${id}`,newOrder)
      toast.success("Order update successfully")
      
   //await dispatch(getOrder(res.data.orderData))
@@ -130,7 +130,7 @@ setClod(true)
      )
      let subAll=okk.reduce((total,items)=>total+items.qty*items.price,0)
      const newOrder={order:okk,subTotal:subAll,userDetails:userData}
-    const res=await axios.put(`https://ecommerce-app-5dnf.onrender.com/products/orders/${id}`,newOrder)
+    const res=await axios.put(`http://localhost:3000/products/orders/${id}`,newOrder)
     
  }
  const decQty=async(ii)=>{
@@ -144,7 +144,7 @@ setClod(true)
   let subAll=okk.reduce((total,items)=>total+items.qty*items.price,0)
      const newOrder={order:okk,subTotal:subAll,userDetails:userData}
    
-    const res=await axios.put(`https://ecommerce-app-5dnf.onrender.com/products/orders/${id}`,newOrder)
+    const res=await axios.put(`http://localhost:3000/products/orders/${id}`,newOrder)
   localStorage.setItem("cart",JSON.stringify(test))
      
    }catch(error){
@@ -154,7 +154,7 @@ setClod(true)
   
   const deleteOrder=async()=>{
     try{
-      const res=await axios.delete(`https://ecommerce-app-5dnf.onrender.com/products/orders/${id}`)
+      const res=await axios.delete(`http://localhost:3000/products/orders/${id}`)
       console.log(res.data)
       navigate("/orders")
   // await FindOrder()

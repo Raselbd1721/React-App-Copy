@@ -18,7 +18,7 @@ const dispatch=useDispatch()
   
    const callApi=async()=>{
     try{
-      const res=await axios.get('https://ecommerce-app-5dnf.onrender.com/products/islogin')
+      const res=await axios.get('http://localhost:3000/products/islogin')
       console.log(res.data)
       //dispatch(setLoadings(false))
       setClod(true)

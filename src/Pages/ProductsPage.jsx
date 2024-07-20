@@ -39,7 +39,7 @@ export default function ProductsPage(){
 
   const callCategory=async()=>{
     try{
-      const res=await axios.get("https://ecommerce-app-5dnf.onrender.com/products/category")
+      const res=await axios.get("http://localhost:3000/products/category")
      await setCategory(res.data.allCategory)
     }catch(error){
       toast.error(error.response.data.message)
@@ -72,7 +72,7 @@ setTimeout(()=>{
 
   const findUser=async()=>{
     try{
-      const userRes=await axios.get('https://ecommerce-app-5dnf.onrender.com/products/islogin')
+      const userRes=await axios.get('http://localhost:3000/products/islogin')
       await setUserRole({...userRes.data.userInfo})
       }catch(error){
       console.log(error)
@@ -104,7 +104,7 @@ setTimeout(()=>{
  formData.append("price",singlePro.price)
  formData.append("desc",singlePro.desc)
  formData.append("category",singlePro.category)
-   const res=await axios.post("https://ecommerce-app-5dnf.onrender.com/products/app",formData)
+   const res=await axios.post("http://localhost:3000/products/app",formData)
    await setData([...data,res.data])
     await toast.success(res.data.message)
     setSinglePro({name:"",price:0,desc:"",image:"",category:""})
@@ -118,7 +118,7 @@ setTimeout(()=>{
   
   const deleteProduct=async(id)=>{
     try{
-      const res=await axios.delete(`https://ecommerce-app-5dnf.onrender.com/products/app/${id}`)
+      const res=await axios.delete(`http://localhost:3000/products/app/${id}`)
       toast.success(res.data.message)
       
     }catch(error){
@@ -131,7 +131,7 @@ setTimeout(()=>{
   const callApi=async()=>{
     try{
       
-    const res=await axios.get(`https://ecommerce-app-5dnf.onrender.com/products/app?page=${currentPage}&&search=${search}`)
+    const res=await axios.get(`http://localhost:3000/products/app?page=${currentPage}&&search=${search}`)
    setClod(true)
      await setData(res.data.allProducts)
      await setTotalPage(res.data.totalPage)

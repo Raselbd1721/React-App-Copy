@@ -49,7 +49,7 @@ export default function Users(){
 }
 const findUser=async()=>{
     try{
-      const userRes=await axios.get('https://ecommerce-app-5dnf.onrender.com/products/islogin')
+      const userRes=await axios.get('http://localhost:3000/products/islogin')
       await setUserRole({...userRes.data.userInfo})
       await setID(userRes.data.userInfo.id)
 
@@ -61,10 +61,10 @@ const findUser=async()=>{
 
 const DeactivateUser=async(id)=>{
   try{
-    const res=await axios.put(`https://ecommerce-app-5dnf.onrender.com/products/deactive/${id}`)
+    const res=await axios.put(`http://localhost:3000/products/deactive/${id}`)
     await toast.success(res.data.message)
     if(id===ID){
-      await axios.get("https://ecommerce-app-5dnf.onrender.com/products/logout")
+      await axios.get("http://localhost:3000/products/logout")
       dispatch(setSideBar(false))
       navigate("/login")
     }
@@ -77,7 +77,7 @@ const DeactivateUser=async(id)=>{
 
 const ActivateUser=async(id)=>{
   try{
-    const res=await axios.put(`https://ecommerce-app-5dnf.onrender.com/products/activate/${id}`)
+    const res=await axios.put(`http://localhost:3000/products/activate/${id}`)
     await toast.success(res.data.message)
     
   }catch(error){
@@ -92,10 +92,10 @@ const ActivateUser=async(id)=>{
 const deleteUser=async(id)=>{
   try{
     
-    const res=await axios.delete(`https://ecommerce-app-5dnf.onrender.com/products/deleteUser/${id}`)
+    const res=await axios.delete(`http://localhost:3000/products/deleteUser/${id}`)
     await toast.success(res.data.message)
    if(id===ID){
-      await axios.get("https://ecommerce-app-5dnf.onrender.com/products/logout")
+      await axios.get("http://localhost:3000/products/logout")
       dispatch(setSideBar(false))
       navigate("/login")
     }
@@ -118,7 +118,7 @@ const editUser=(val)=>{
     e.preventDefault()
     try{
       if(editId && editCon){
-      const resp=await axios.put(`https://ecommerce-app-5dnf.onrender.com/products/user/${editId}`,userData)
+      const resp=await axios.put(`http://localhost:3000/products/user/${editId}`,userData)
       
     await toast.success(resp.data.message)
    
@@ -129,7 +129,7 @@ const editUser=(val)=>{
     setEditId("")
     }  
       }else{
-      const res=await axios.post("https://ecommerce-app-5dnf.onrender.com/products/user",userData)
+      const res=await axios.post("http://localhost:3000/products/user",userData)
       await setOtp(res.data.otp)
     await toast.success(res.data.message)
     setUserData({email:"",password:"",role:"admin"})
@@ -147,7 +147,7 @@ const editUser=(val)=>{
   const callApi=async()=>{
     try{
       
-    const res=await axios.get(`https://ecommerce-app-5dnf.onrender.com/products/allusers?page=${currentPage}&&search=${search}`)
+    const res=await axios.get(`http://localhost:3000/products/allusers?page=${currentPage}&&search=${search}`)
      await setData(res.data.allUser)
      await setTotalPage(res.data.totalPage)
     }catch(error){
