@@ -24,7 +24,7 @@ const App=()=>{
   axios.defaults.withCredentials=true
   const callApi=async()=>{
     try{
-      const res=await axios.get('http://localhost:3000/products/islogin')
+      const res=await axios.get('https://ecommerce-app-5dnf.onrender.com/products/islogin')
      setIsLoading(false)
     }catch(error){
       setIsLoading(true)

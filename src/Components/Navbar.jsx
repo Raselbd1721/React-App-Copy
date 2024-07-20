@@ -31,7 +31,7 @@ const Navbar=()=>{
 
   const callApi=async()=>{
     try{
-      const res=await axios.get('http://localhost:3000/products/islogin')
+      const res=await axios.get('https://ecommerce-app-5dnf.onrender.com/products/islogin')
       setData({...res.data.userInfo})
       setLogedIn(true)
 dispatch(setCartNumber(true))
