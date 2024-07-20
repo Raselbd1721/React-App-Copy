@@ -11,7 +11,7 @@ export default function Error(){
   
   const callApi=async()=>{
     try{
-      const res=await axios.get('http://localhost:3000/products/islogin')
+      const res=await axios.get('https://ecommerce-app-5dnf.onrender.com/products/islogin')
       console.log(res.data)
     }catch(error){
       console.log(error)

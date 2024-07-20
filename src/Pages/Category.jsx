@@ -48,7 +48,7 @@ export default function Category(){
         
  const callUser=async()=>{
     try{
-      const res=await axios.get('http://localhost:3000/products/islogin')
+      const res=await axios.get('https://ecommerce-app-5dnf.onrender.com/products/islogin')
       await setUserData({...res.data.userInfo})
      
     }catch(error){
@@ -65,7 +65,7 @@ export default function Category(){
  const numberOfProducts=async(val)=>{
     try{
       //setSearch(val.name)
-    const res=await axios.get(`http://localhost:3000/products/app?page=${currentPage}&&search=${val.name}`)
+    const res=await axios.get(`https://ecommerce-app-5dnf.onrender.com/products/app?page=${currentPage}&&search=${val.name}`)
     console.log(res.data.actualTotal)
     if(val.name === "All"){
    return await setTotalProduct(res.data.actualTotal)
@@ -78,7 +78,7 @@ export default function Category(){
   }    
   const callApi=async()=>{
     try{
-      const res=await axios.get(`http://localhost:3000/products/category?limit=5&&page=${currentPage}&&search=${search}`)
+      const res=await axios.get(`https://ecommerce-app-5dnf.onrender.com/products/category?limit=5&&page=${currentPage}&&search=${search}`)
    setClod(true)
      await setData(res.data.allCategory)
      await setTotalPage(res.data.totalPage)
@@ -111,7 +111,7 @@ export default function Category(){
  formData.append("name",name)
  formData.append("image",simage)
    
-     const res=await axios.post("http://localhost:3000/products/createCategory",formData)
+     const res=await axios.post("https://ecommerce-app-5dnf.onrender.com/products/createCategory",formData)
    const newData= await res.data
      await setData([...data,newData])
      setName("")
@@ -135,7 +135,7 @@ export default function Category(){
   
   const deleteCategory=async(id)=>{
     try{
-      const res=await axios.delete(`http://localhost:3000/products/category/${id}`)
+      const res=await axios.delete(`https://ecommerce-app-5dnf.onrender.com/products/category/${id}`)
       toast.success(res.data.message)
       
     }catch(error){
@@ -147,7 +147,7 @@ export default function Category(){
   const editById =async(id)=>{
     try{
       setUpdate({cond:true,id:id})
-      const res=await axios.get(`http://localhost:3000/products/singlecategory/${id}`)
+      const res=await axios.get(`https://ecommerce-app-5dnf.onrender.com/products/singlecategory/${id}`)
       const data=await res.data.singleCategory
       await setSimage(data.image)
      setName(data.name)
@@ -190,7 +190,7 @@ export default function Category(){
     
 
     
-      const res=await axios.put(`http://localhost:3000/products/category/${update.id}`,formData)
+      const res=await axios.put(`https://ecommerce-app-5dnf.onrender.com/products/category/${update.id}`,formData)
       
       setUpdate({cond:false,id:""})
     setImage("")

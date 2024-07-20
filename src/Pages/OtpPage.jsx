@@ -20,7 +20,7 @@ export default function OtpPage(){
   
   const callApi=async()=>{
     try{
-      const res=await axios.get('http://localhost:3000/products/islogin')
+      const res=await axios.get('https://ecommerce-app-5dnf.onrender.com/products/islogin')
      //setIsLoading(false)
     }catch(error){
       //setIsLoading(true)
@@ -31,7 +31,7 @@ toast.error(error.response.data.message)
 const handleSubmit=async(e)=>{
  try{
   e.preventDefault()
-   const res=await axios.post("http://localhost:3000/products/checkotp",{secretKey})
+   const res=await axios.post("https://ecommerce-app-5dnf.onrender.com/products/checkotp",{secretKey})
    await toast.success(res.data.message)
    await navigate("/users")
  }catch(error){
