@@ -24,7 +24,7 @@ export default function LogedinPage(){
  
    const callApi=async()=>{
     try{
-      const res=await axios.get('https://ecommerce-app-5dnf.onrender.com/products/islogin')
+      const res=await axios.get('http://localhost:3000/products/islogin')
       if(res.data){
      setIsLo(true)
       }
@@ -53,7 +53,7 @@ export default function LogedinPage(){
   const userLogin=async(e)=>{
    try{
       e.preventDefault()
-      const res=await axios.post("https://ecommerce-app-5dnf.onrender.com/products/userlogin",userd)
+      const res=await axios.post("http://localhost:3000/products/userlogin",userd)
     await toast.success(res.data.message)
       setUserd({email:"",password:""})
       
