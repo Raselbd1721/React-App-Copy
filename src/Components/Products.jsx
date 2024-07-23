@@ -39,7 +39,7 @@ const SelRef=useRef()
   const callApi=async()=>{
     try{
       
-      const res=await axios.get(`http://localhost:3000/products/app?page=${currentPage}&&search=${category}`)
+      const res=await axios.get(`https://ecommerce-app-5dnf.onrender.com/products/app?page=${currentPage}&&search=${category}`)
      //const newData=await res.json()
      await setTotalPage(res.data.totalPage)
      await setData(res.data.allProducts)
@@ -78,7 +78,7 @@ setTimeout(()=>{
 
 const callUser=async()=>{
     try{
-      const res=await axios.get('http://localhost:3000/products/islogin')
+      const res=await axios.get('https://ecommerce-app-5dnf.onrender.com/products/islogin')
       await setUserData({...res.data.userInfo})
      
     }catch(error){
