@@ -27,7 +27,7 @@ const CategoryList=()=>{
         axios.defaults.withCredentials=true
   const callApi=async()=>{
     try{
-      const res=await axios.get("https://ecommerce-app-5dnf.onrender.com/products/category")
+      const res=await axios.get("http://localhost:3000/products/category")
      //const newData=await res.json()
      setClod(true)
      await setData(res.data.allCategory)
