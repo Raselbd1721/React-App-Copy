@@ -17,13 +17,13 @@ export default function MainPage(){
   const [isLo,setIsLo]=useState(false)
   const [isLoading,setIsLoading]=useState(false)
   
-  const {login,token}=useSelector((state)=>state.EcomReducer)
+  const {login}=useSelector((state)=>state.EcomReducer)
   const [userd,setUserd]=useState({email:"",password:""})
   
  axios.defaults.withCredentials=true
    const callApi=async()=>{
     try{
-      const res=await axios.get('http://localhost:3000/products')
+      const res=await axios.get('http://localhost:3000/products/islogin')
       if(res.data){
         //dispatch(setLogin(true))
      setIsLo(true)
@@ -94,7 +94,7 @@ export default function MainPage(){
 </div>*/}
  
   return( 
-  <div>{token && <Outlet /> }
+  <div>{isLo && <Outlet /> }
   </div>
  ) 
 }

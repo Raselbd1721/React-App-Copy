@@ -20,7 +20,6 @@ const initialState = {
   loader:false,
   cartNumber:true,
   myToast:"",
-  token:"",
 }
 
 const EcomReducer=createSlice({
@@ -102,13 +101,10 @@ const EcomReducer=createSlice({
     setCartNumber:(state,action)=>{
       state.cartNumber=action.payload
     },
-    setToken:(state,action)=>{
-      state.token=action.payload
-    },
       
     }
   
   
 })
-export const {getCategory,addToCart,setNavi,removeFromCart,incQty,decQty,selCategory,getCat,getOrder,setLogin,setSideBar,setLoadings,setToast,setCartNumber,setToken}=EcomReducer.actions
+export const {getCategory,addToCart,setNavi,removeFromCart,incQty,decQty,selCategory,getCat,getOrder,setLogin,setSideBar,setLoadings,setToast,setCartNumber}=EcomReducer.actions
 export default EcomReducer.reducer
