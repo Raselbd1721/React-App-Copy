@@ -5,7 +5,7 @@ export const setLs=(LsName,expireInSeconds,data)=>{
   const expireAt = now + expireInSeconds * 1000;
   const item={
     data:data,
-    expireAt,
+    expireAt:expireAt,
   }
   localStorage.setItem(LsName, JSON.stringify(item))
   }
@@ -23,7 +23,6 @@ export const setLs=(LsName,expireInSeconds,data)=>{
       localStorage.removeItem(LsName)
       return str
     }
-    console.log(item.data)
       return item.data
   }
   
