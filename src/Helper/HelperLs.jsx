@@ -9,6 +9,7 @@ export const setLs=(LsName,expireInSeconds,data)=>{
   }
   localStorage.setItem(LsName, JSON.stringify(item))
   }
+  
   export const getLs=(LsName)=>{
     let str=""
     const getVal=localStorage.getItem(LsName)
@@ -16,12 +17,12 @@ export const setLs=(LsName,expireInSeconds,data)=>{
       return str
     }
     const item=JSON.parse(getVal)
+    
     const date=Date.now()
     if(now >= item.expireAt){
       localStorage.removeItem(LsName)
       return str
     }
-    console.log(item.data)
       return item.data
   }
   
