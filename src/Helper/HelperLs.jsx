@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export const setLs=(LsName,expireInSeconds,data)=>{
-  const date=Date.now()
+  const now=Date.now()
   const expireAt = now + expireInSeconds * 1000;
   const item={
     data:data,
