@@ -1,18 +1,28 @@
 import axios from "axios"
 
-export const setLs=(LsName,expire,data)=>{
-    localStorage.setItem(LsName,data)
-    setTimeout(()=>{
-      localStorage.removeItem(LsName)
-    },expire*1000)
+export const setLs=(LsName,expireInSeconds,data)=>{
+  const date=Date.now()
+  const expireAt = now + expireInSeconds * 1000;
+  const item={
+    data:data,
+    expireAt,
+  }
+  localStorage.setItem(LsName, JSON.stringify(item))
   }
   export const getLs=(LsName)=>{
     let str=""
     const getVal=localStorage.getItem(LsName)
-    if(getVal){
-      return getVal
-    }
+    if(!getVal){
       return str
+    }
+    const item=JSON.parse(getVal)
+    const date=Date.now()
+    if(now >= item.expireAt){
+      localStorage.removeItem(LsName)
+      return str
+    }
+    console.log(item.data)
+      return item.data
   }
   
  export const RemoveLs=(LsName)=>{
