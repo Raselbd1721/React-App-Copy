@@ -18,11 +18,12 @@ export const setLs=(LsName,expireInSeconds,data)=>{
     }
     const item=JSON.parse(getVal)
     
-    const date=Date.now()
+    const now=Date.now()
     if(now >= item.expireAt){
       localStorage.removeItem(LsName)
       return str
     }
+    console.log(item.data)
       return item.data
   }
   
