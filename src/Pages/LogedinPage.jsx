@@ -3,6 +3,8 @@ import React,{useState,useEffect,useRef} from "react"
 import { Outlet, Link,useNavigate } from 'react-router-dom'
 import {useDispatch,useSelector } from "react-redux";
 import {setLogin,setSideBar,setCartNumber,getCategory,selCategory,getCat} from "../Components/EcomReducer.jsx";
+import {setLs,RemoveLs,getLs,callIslogin} from "../Helper/HelperLs.jsx";
+
 import toast,{Toaster} from 'react-hot-toast';
 import { RxCrossCircled } from "react-icons/rx";
 //import UserLogin from "../Pages/UserLogin.jsx"
@@ -24,7 +26,8 @@ export default function LogedinPage(){
  
    const callApi=async()=>{
     try{
-      const res=await axios.get('http://localhost:3000/products/islogin')
+      const res=await callIslogin({action:"get",url:'https://ecommerce-app-5dnf.onrender.com/products/islogin'})
+      
       if(res.data){
      setIsLo(true)
       }
@@ -36,13 +39,14 @@ export default function LogedinPage(){
   
   const userLogOut=async()=>{
    try{
-      const res=await axios.get("http://localhost:3000/products/logout")
+      const res=await callIslogin({action:"get",url:"https://ecommerce-app-5dnf.onrender.com/products/logout"})
       await toast.success(res.data.message)
       dispatch(setSideBar(false))
       dispatch(setCartNumber(false))
       dispatch(selCategory({name:"All",category:""}))
   dispatch(getCategory(""))
   dispatch(getCat([]))
+  await RemoveLs("loginToken")
       //navigate(-1)
     }catch(error){
      await toast.error(error.response.data.message)
@@ -53,10 +57,10 @@ export default function LogedinPage(){
   const userLogin=async(e)=>{
    try{
       e.preventDefault()
-      const res=await axios.post("http://localhost:3000/products/userlogin",userd)
+      const res=await callIslogin({action:"post",url:"https://ecommerce-app-5dnf.onrender.com/products/userlogin",data:userd})
     await toast.success(res.data.message)
       setUserd({email:"",password:""})
-      
+   await setLs("loginToken",14400,res.data.loginToken)
      setIsLo(true)
       navigate("/home")
     }catch(error){

@@ -6,6 +6,8 @@ import '../App.css'
 import { v4 as uuid } from "uuid";
 import {useDispatch,useSelector } from "react-redux";
 import {getCategory,selCategory,getCat} from "./EcomReducer"
+import {setLs,RemoveLs,getLs,callIslogin} from "../Helper/HelperLs.jsx";
+
 import axios from "axios"
 
 const CategoryList=()=>{
@@ -27,7 +29,7 @@ const CategoryList=()=>{
         axios.defaults.withCredentials=true
   const callApi=async()=>{
     try{
-      const res=await axios.get("http://localhost:3000/products/category")
+      const res=await callIslogin({action:"get",url:"https://ecommerce-app-5dnf.onrender.com/products/category"})
      //const newData=await res.json()
      setClod(true)
      await setData(res.data.allCategory)

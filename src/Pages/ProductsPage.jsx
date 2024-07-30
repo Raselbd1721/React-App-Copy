@@ -10,6 +10,8 @@ import { FaCaretDown,FaCaretUp } from "react-icons/fa";
 import { MdAddLink } from "react-icons/md";
 import { RxCrossCircled } from "react-icons/rx";
 import toast,{Toaster} from 'react-hot-toast';
+import {setLs,RemoveLs,getLs,callIslogin} from "../Helper/HelperLs.jsx";
+
 import axios from 'axios'
 
 export default function ProductsPage(){
@@ -39,7 +41,7 @@ export default function ProductsPage(){
 
   const callCategory=async()=>{
     try{
-      const res=await axios.get("http://localhost:3000/products/category")
+      const res=await callIslogin({action:"get",url:"https://ecommerce-app-5dnf.onrender.com/products/category"})
      await setCategory(res.data.allCategory)
     }catch(error){
       toast.error(error.response.data.message)
@@ -72,7 +74,7 @@ setTimeout(()=>{
 
   const findUser=async()=>{
     try{
-      const userRes=await axios.get('http://localhost:3000/products/islogin')
+      const userRes=await callIslogin({action:"get",url:"https://ecommerce-app-5dnf.onrender.com/products/islogin"})
       await setUserRole({...userRes.data.userInfo})
       }catch(error){
       console.log(error)
@@ -104,11 +106,12 @@ setTimeout(()=>{
  formData.append("price",singlePro.price)
  formData.append("desc",singlePro.desc)
  formData.append("category",singlePro.category)
-   const res=await axios.post("http://localhost:3000/products/app",formData)
+   const res=await callIslogin({action:"post",url:"https://ecommerce-app-5dnf.onrender.com/products/app",data:formData})
    await setData([...data,res.data])
     await toast.success(res.data.message)
     setSinglePro({name:"",price:0,desc:"",image:"",category:""})
     setImage("")
+    setFormCon(false)
    }catch(error){
      toast.error(error.response.data.message)
      
@@ -118,7 +121,7 @@ setTimeout(()=>{
   
   const deleteProduct=async(id)=>{
     try{
-      const res=await axios.delete(`http://localhost:3000/products/app/${id}`)
+      const res=await callIslogin({action:"delete",url:"https://ecommerce-app-5dnf.onrender.com/products/app",id:id})
       toast.success(res.data.message)
       
     }catch(error){
@@ -131,7 +134,11 @@ setTimeout(()=>{
   const callApi=async()=>{
     try{
       
-    const res=await axios.get(`http://localhost:3000/products/app?page=${currentPage}&&search=${search}`)
+    const res=await axios.get(`https://ecommerce-app-5dnf.onrender.com/products/app?page=${currentPage}&&search=${search}`,{
+      headers: {
+        "Authorization": `Bearer ${getLs("loginToken")}`
+        }
+    })
    setClod(true)
      await setData(res.data.allProducts)
      await setTotalPage(res.data.totalPage)

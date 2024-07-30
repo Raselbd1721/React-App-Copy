@@ -8,6 +8,7 @@ import { FaCaretDown,FaCaretUp } from "react-icons/fa";
 import { ImSpinner3 } from "react-icons/im";
 import { MdAddLink } from "react-icons/md";
 import {setLogin,setSideBar} from "../Components/EcomReducer.jsx";
+import {setLs,RemoveLs,getLs,callIslogin} from "../Helper/HelperLs.jsx";
 import Paginations from "../Pages/Paginations.jsx"
 import OtpPage from "../Pages/OtpPage.jsx"
 import "../Components/Op.css"
@@ -49,11 +50,13 @@ export default function Users(){
 }
 const findUser=async()=>{
     try{
-      const userRes=await axios.get('http://localhost:3000/products/islogin')
+      const userRes=await callIslogin({action:"get",url:'https://ecommerce-app-5dnf.onrender.com/products/islogin'})
       await setUserRole({...userRes.data.userInfo})
       await setID(userRes.data.userInfo.id)
 
     }catch(error){
+     RemoveLs("loginToken")
+      navigate("/login")
       console.log(error)
     }
     }
@@ -61,10 +64,13 @@ const findUser=async()=>{
 
 const DeactivateUser=async(id)=>{
   try{
-    const res=await axios.put(`http://localhost:3000/products/deactive/${id}`)
+    const res=await callIslogin({action:"put",url:"https://ecommerce-app-5dnf.onrender.com/products/deactive",id:id})
+    //axios.put(`http://localhost:3000/products/deactive/${id}`)
     await toast.success(res.data.message)
     if(id===ID){
-      await axios.get("http://localhost:3000/products/logout")
+      await callIslogin({action:"get",url:"https://ecommerce-app-5dnf.onrender.com/products/logout"})
+
+       await RemoveLs("loginToken")
       dispatch(setSideBar(false))
       navigate("/login")
     }
@@ -77,7 +83,8 @@ const DeactivateUser=async(id)=>{
 
 const ActivateUser=async(id)=>{
   try{
-    const res=await axios.put(`http://localhost:3000/products/activate/${id}`)
+    const res=await callIslogin({action:"put",url:"https://ecommerce-app-5dnf.onrender.com/products/activate",id:id})
+   // axios.put(`http://localhost:3000/products/activate/${id}`)
     await toast.success(res.data.message)
     
   }catch(error){
@@ -92,12 +99,14 @@ const ActivateUser=async(id)=>{
 const deleteUser=async(id)=>{
   try{
     
-    const res=await axios.delete(`http://localhost:3000/products/deleteUser/${id}`)
+    const res=await callIslogin({action:"delete",url:"https://ecommerce-app-5dnf.onrender.com/products/deleteUser",id:id})
+    //axios.delete(`http://localhost:3000/products/deleteUser/${id}`)
     await toast.success(res.data.message)
    if(id===ID){
-      await axios.get("http://localhost:3000/products/logout")
+
+  await RemoveLs("loginToken")
       dispatch(setSideBar(false))
-      navigate("/login")
+      //navigate("/login")
     }
     
   }catch(error){
@@ -118,7 +127,9 @@ const editUser=(val)=>{
     e.preventDefault()
     try{
       if(editId && editCon){
-      const resp=await axios.put(`http://localhost:3000/products/user/${editId}`,userData)
+        
+      const resp=await callIslogin({action:"put",url:"https://ecommerce-app-5dnf.onrender.com/products/user",data:userData,id:editId})
+      //axios.put(`http://localhost:3000/products/user/${editId}`,userData)
       
     await toast.success(resp.data.message)
    
@@ -127,15 +138,20 @@ const editUser=(val)=>{
     setFormCon(false)
     setEditCon(false)
     setEditId("")
+    console.log(resp.data.loginToken)
+   setLs("loginToken",14400,resp.data.loginToken)
     }  
       }else{
-      const res=await axios.post("http://localhost:3000/products/user",userData)
+      const res=await callIslogin({action:"post",url:"https://ecommerce-app-5dnf.onrender.com/products/user",data:userData})
+      //axios.post("http://localhost:3000/products/user",userData)
       await setOtp(res.data.otp)
     await toast.success(res.data.message)
     setUserData({email:"",password:"",role:"admin"})
+    setLs("userPostInfo",180,res.data.userInfo)
    await navigate("/otppage",{state:{otp:res.data.otp,length:6}})
       }
     }catch(error){
+      console.log(error.response.data.message)
      toast.error(error.response.data.message[0])
     }
     await callApi()
@@ -143,14 +159,18 @@ const editUser=(val)=>{
   }
   
   
-  
   const callApi=async()=>{
     try{
       
-    const res=await axios.get(`http://localhost:3000/products/allusers?page=${currentPage}&&search=${search}`)
+    const res=await axios.get(`https://ecommerce-app-5dnf.onrender.com/products/allusers?page=${currentPage}&&search=${search}`,{
+      headers: {
+            "Authorization": `Bearer ${getLs("loginToken")}`
+        }
+    })
      await setData(res.data.allUser)
      await setTotalPage(res.data.totalPage)
     }catch(error){
+      navigate("/login")
       toast.error(error.response.data.message)
     }
   }

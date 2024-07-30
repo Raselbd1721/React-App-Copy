@@ -2,6 +2,8 @@
 
 import React,{useState,useEffect,useRef} from "react"
 import { useLocation,useNavigate } from 'react-router-dom';
+import {setLs,RemoveLs,getLs,callIslogin} from "../Helper/HelperLs.jsx";
+
 import toast from 'react-hot-toast';
 import "../Components/Op.css"
 import axios from 'axios'
@@ -20,7 +22,7 @@ export default function OtpPage(){
   
   const callApi=async()=>{
     try{
-      const res=await axios.get('http://localhost:3000/products/islogin')
+      const res=await callIslogin({action:"get",url:"https://ecommerce-app-5dnf.onrender.com/products/islogin"})
      //setIsLoading(false)
     }catch(error){
       //setIsLoading(true)
@@ -28,15 +30,25 @@ toast.error(error.response.data.message)
     }
   }
   
+
+  
 const handleSubmit=async(e)=>{
  try{
   e.preventDefault()
-   const res=await axios.post("http://localhost:3000/products/checkotp",{secretKey})
+   const res=await axios.post("https://ecommerce-app-5dnf.onrender.com/products/checkotp",{secretKey},{
+     headers: {
+            "Authorization": `Bearer ${getLs("userPostInfo")}`
+        }
+   })
+   
    await toast.success(res.data.message)
+await RemoveLs("userPostInfo")
    await navigate("/users")
  }catch(error){
    toast.error(error.response.data.message)
   await callApi()
+  console.log(error.response.data)
+  console.log(secretKey)
  }
 }
 
@@ -73,7 +85,7 @@ const handleChange=(e,index)=>{
     if(selRefs.current[inp.indexOf("")]){
   return selRefs.current[inp.indexOf("")].focus()
   }
-  
+ 
 callApi()
   }, [])
   

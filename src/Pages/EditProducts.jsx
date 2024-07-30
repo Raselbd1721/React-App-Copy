@@ -5,6 +5,8 @@ import toast,{Toaster} from 'react-hot-toast';
 import { FaCaretDown,FaCaretUp } from "react-icons/fa";
 import { MdAddLink } from "react-icons/md";
 import { RxCrossCircled } from "react-icons/rx";
+import {setLs,RemoveLs,getLs,callIslogin} from "../Helper/HelperLs.jsx";
+
 import axios from 'axios'
 
 export default function EditProducts(){
@@ -54,7 +56,7 @@ export default function EditProducts(){
  formData.append("desc",singlePro.desc)
  formData.append("category",singlePro.category)
 
-      const res=await axios.put(`http://localhost:3000/products/app/${_id}`,formData)
+      const res=await callIslogin({action:"put",url:"https://ecommerce-app-5dnf.onrender.com/products/app",data:formData,id:_id})
     setSimage("")
     setSinglePro({name:"",price:0,desc:"",image:"",category:""})
     await toast.success("Product update successfully")
@@ -71,7 +73,7 @@ export default function EditProducts(){
   
   const callApi=async()=>{
     try{
-      const res=await axios.get(`http://localhost:3000/products/findproduct/${_id}`)
+      const res=await callIslogin({action:"get",url:"https://ecommerce-app-5dnf.onrender.com/products/findproduct",id:_id})
    const data=await res.data.singleProduct
   await console.log(data)
   await setSinglePro({name:data.name,price:data.price,desc:data.desc,category:data.category,image:data.image})
