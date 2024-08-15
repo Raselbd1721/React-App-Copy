@@ -3,8 +3,6 @@ import React,{useState,useEffect,useRef} from "react"
 import { Outlet, Link,useNavigate } from 'react-router-dom'
 import {useDispatch,useSelector } from "react-redux";
 import {setLogin,setSideBar,setCartNumber,getCategory,selCategory,getCat} from "../Components/EcomReducer.jsx";
-import {setLs,RemoveLs,getLs,callIslogin} from "../Helper/HelperLs.jsx";
-
 import toast,{Toaster} from 'react-hot-toast';
 import { RxCrossCircled } from "react-icons/rx";
 //import UserLogin from "../Pages/UserLogin.jsx"
@@ -26,8 +24,7 @@ export default function LogedinPage(){
  
    const callApi=async()=>{
     try{
-      const res=await callIslogin({action:"get",url:'https://ecommerce-app-5dnf.onrender.com/products/islogin'})
-      
+      const res=await axios.get('http://localhost:3000/products/islogin')
       if(res.data){
      setIsLo(true)
       }
@@ -39,14 +36,13 @@ export default function LogedinPage(){
   
   const userLogOut=async()=>{
    try{
-      const res=await callIslogin({action:"get",url:"https://ecommerce-app-5dnf.onrender.com/products/logout"})
+      const res=await axios.get("http://localhost:3000/products/logout")
       await toast.success(res.data.message)
       dispatch(setSideBar(false))
       dispatch(setCartNumber(false))
       dispatch(selCategory({name:"All",category:""}))
   dispatch(getCategory(""))
   dispatch(getCat([]))
-  await RemoveLs("loginToken")
       //navigate(-1)
     }catch(error){
      await toast.error(error.response.data.message)
@@ -57,10 +53,10 @@ export default function LogedinPage(){
   const userLogin=async(e)=>{
    try{
       e.preventDefault()
-      const res=await callIslogin({action:"post",url:"https://ecommerce-app-5dnf.onrender.com/products/userlogin",data:userd})
+      const res=await axios.post("http://localhost:3000/products/userlogin",userd)
     await toast.success(res.data.message)
       setUserd({email:"",password:""})
-   await setLs("loginToken",14400,res.data.loginToken)
+      
      setIsLo(true)
       navigate("/home")
     }catch(error){
@@ -91,16 +87,16 @@ export default function LogedinPage(){
  
   return(
     
-       <div ref={refData} onClick={(e)=>closeByClick(e)} className={`${ isLo && sideBar ? "mx-2 text-center font-serif pt-0 w-[400px] box-border backdrop-blur-sm fixed inset-0 z-20 pt-10" : "mx-2 text-center font-serif pt-0 w-[400px] box-border backdrop-blur-sm fixed inset-0 z-20 mt-16"}`}>
+       <div ref={refData} onClick={(e)=>closeByClick(e)} className={`${ isLo && sideBar ? "mx-2 text-center font-serif pt-0 box-border backdrop-blur-sm fixed inset-0 z-20 pt-10" : "text-center font-serif pt-0 box-border backdrop-blur-sm fixed inset-0 z-20 mt-16 mx-10"}`}>
 
-<div className="w-[400px] pb-12 pt-4">
-      <div className="text-center py-1 border-2 border-blue-600 border-solid rounded-3xl bg-gray-100 mb-4 shadow-[3px_5px_5px_gray] transform transition ease-in-out duration-500 hover:scale-110 w-[330px] mx-auto px-1">
+<div className="w-full md:w-full md:px-40 md:mx-auto pb-12 pt-4">
+      <div className="text-center py-1 border-2 border-blue-600 border-solid rounded-3xl bg-gray-100 mb-4 shadow-[3px_5px_5px_gray] transform transition ease-in-out duration-500 hover:scale-110 mx-auto">
        {isLo && <div className="flex justify-end m-1">
           <RxCrossCircled className="bg-pink-600 text-white text-3xl rounded-3xl" onClick={()=>closeModal()} /></div>}
               <div className="flex justify-end text-4xl">
       </div>
               <h1 className="text-3xl text-center text-amber-600 pb-2">User Login</h1>
-<form onSubmit={userLogin}>
+<form onSubmit={userLogin} className="">
 <input type="text" placeholder="here Username" name="email" className="p-2 border-2 border-solid border-gray-200 outline-none rounded-lg mb-2" value={userd.email} onChange={(e)=>setUserd({...userd,email:e.target.value})}required/><br/>
 <input type="text" placeholder="here password" name="password" className="p-2 border-2 border-solid border-gray-200 outline-none rounded-lg mb-2" value={userd.password} onChange={(e)=>setUserd({...userd,password:e.target.value})} required/>
 <button className="p-2 border-2 mx-auto block border-amber-200 rounded-xl mt-3 bg-green-600 text-white " type="submit">Submit</button>
