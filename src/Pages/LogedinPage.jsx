@@ -3,6 +3,8 @@ import React,{useState,useEffect,useRef} from "react"
 import { Outlet, Link,useNavigate } from 'react-router-dom'
 import {useDispatch,useSelector } from "react-redux";
 import {setLogin,setSideBar,setCartNumber,getCategory,selCategory,getCat} from "../Components/EcomReducer.jsx";
+import {setLs,RemoveLs,getLs,callIslogin} from "../Helper/HelperLs.jsx";
+
 import toast,{Toaster} from 'react-hot-toast';
 import { RxCrossCircled } from "react-icons/rx";
 //import UserLogin from "../Pages/UserLogin.jsx"
@@ -24,7 +26,8 @@ export default function LogedinPage(){
  
    const callApi=async()=>{
     try{
-      const res=await axios.get('http://localhost:3000/products/islogin')
+      const res=await callIslogin({action:"get",url:'https://ecommerce-app-5dnf.onrender.com/products/islogin'})
+      
       if(res.data){
      setIsLo(true)
       }
@@ -36,13 +39,14 @@ export default function LogedinPage(){
   
   const userLogOut=async()=>{
    try{
-      const res=await axios.get("http://localhost:3000/products/logout")
+      const res=await callIslogin({action:"get",url:"https://ecommerce-app-5dnf.onrender.com/products/logout"})
       await toast.success(res.data.message)
       dispatch(setSideBar(false))
       dispatch(setCartNumber(false))
       dispatch(selCategory({name:"All",category:""}))
   dispatch(getCategory(""))
   dispatch(getCat([]))
+  await RemoveLs("loginToken")
       //navigate(-1)
     }catch(error){
      await toast.error(error.response.data.message)
@@ -53,10 +57,10 @@ export default function LogedinPage(){
   const userLogin=async(e)=>{
    try{
       e.preventDefault()
-      const res=await axios.post("http://localhost:3000/products/userlogin",userd)
+      const res=await callIslogin({action:"post",url:"https://ecommerce-app-5dnf.onrender.com/products/userlogin",data:userd})
     await toast.success(res.data.message)
       setUserd({email:"",password:""})
-      
+   await setLs("loginToken",14400,res.data.loginToken)
      setIsLo(true)
       navigate("/home")
     }catch(error){
@@ -89,7 +93,11 @@ export default function LogedinPage(){
     
        <div ref={refData} onClick={(e)=>closeByClick(e)} className={`${ isLo && sideBar ? "mx-2 text-center font-serif pt-0 box-border backdrop-blur-sm fixed inset-0 z-20 pt-10" : "text-center font-serif pt-0 box-border backdrop-blur-sm fixed inset-0 z-20 mt-16 mx-10"}`}>
 
+<<<<<<< HEAD
 <div className="w-[340px] md:w-[500px] mx-auto pb-12 pt-4">
+=======
+<div className="w-full md:w-full md:px-40 md:mx-auto pb-12 pt-4">
+>>>>>>> origin/main
       <div className="text-center py-1 border-2 border-blue-600 border-solid rounded-3xl bg-gray-100 mb-4 shadow-[3px_5px_5px_gray] transform transition ease-in-out duration-500 hover:scale-110 mx-auto">
        {isLo && <div className="flex justify-end m-1">
           <RxCrossCircled className="bg-pink-600 text-white text-3xl rounded-3xl" onClick={()=>closeModal()} /></div>}

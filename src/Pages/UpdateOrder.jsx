@@ -9,6 +9,8 @@ import { CiCirclePlus,CiCircleMinus} from "react-icons/ci";
 import { RxCrossCircled } from "react-icons/rx";
 
 import LoadingPage from "../Pages/LoadingPage.jsx"
+import {setLs,RemoveLs,getLs,callIslogin} from "../Helper/HelperLs.jsx";
+
 import toast,{Toaster} from 'react-hot-toast';
 import "../Components/Op.css"
 
@@ -18,11 +20,16 @@ export default function UpdateOrder(){
    const[isSuccess,setIsSuccess]=useState(null)
    const[isLoading,setIsLoading]=useState(false)
    const[clod,setClod]=useState(false)
+   
    const location=useLocation()
   const {invoice}=location.state
    
 const { id } = useParams()
   const navigate=useNavigate()
+    
+  const[Active,setActive]=useState("")
+  const dispatch=useDispatch()
+  
  const[cart,setCart]=useState([])
 const[userData,setUserData]=useState({})
   
@@ -37,15 +44,13 @@ const jsData=()=>{
      return []
    }
  }
- const[test,setTest]=useState(jsData())
-  
-  
-  
+
   axios.defaults.withCredentials=true
+  const[test,setTest]=useState(jsData())
   
   const callApi=async()=>{
     try{
-      const res=await axios.get('http://localhost:3000/products/islogin')
+      const res=await callIslogin({action:"get",url:"https://ecommerce-app-5dnf.onrender.com/products/islogin"})
       await setUserData({...res.data.userInfo})
     }catch(error){
       console.log(error)
@@ -56,7 +61,7 @@ const jsData=()=>{
     
     try{
       setIsSuccess(false)
-   const res=await axios.get(`http://localhost:3000/products/singleorder/${id}`)
+   const res=await callIslogin({action:"get",url:"https://ecommerce-app-5dnf.onrender.com/products/singleorder",id:id})
 if(res.data){
   setIsSuccess(true)
       await setCart(res.data.singleOrder)
@@ -70,9 +75,7 @@ setClod(true)
     }
   }
 
-  
-  const[Active,setActive]=useState("")
-  const dispatch=useDispatch()
+
   
   let subTotal=test.reduce((total,items)=>total+items.qty*items.price,0)
   
@@ -93,7 +96,7 @@ setClod(true)
           await deleteOrder()
         }
         else{
- const res= await axios.put(`http://localhost:3000/products/orders/${id}`,newOrder)
+ const res= await callIslogin({action:"put",url:"https://ecommerce-app-5dnf.onrender.com/products/orders",data:newOrder,id:id})
     toast.success("Items delete successfully")
         }
    
@@ -107,7 +110,7 @@ setClod(true)
  const UpdateOrder=async()=>{
    try{
      const newOrder={order:test,subTotal:subTotal,userDetails:userData}
-    const res= await axios.put(`http://localhost:3000/products/orders/${id}`,newOrder)
+    const res= await callIslogin({action:"put",url:"https://ecommerce-app-5dnf.onrender.com/products/orders",data:newOrder,id:id})
      toast.success("Order update successfully")
      
   //await dispatch(getOrder(res.data.orderData))
@@ -130,7 +133,7 @@ setClod(true)
      )
      let subAll=okk.reduce((total,items)=>total+items.qty*items.price,0)
      const newOrder={order:okk,subTotal:subAll,userDetails:userData}
-    const res=await axios.put(`http://localhost:3000/products/orders/${id}`,newOrder)
+    const res=await callIslogin({action:"put",url:"https://ecommerce-app-5dnf.onrender.com/products/orders",data:newOrder,id:id})
     
  }
  const decQty=async(ii)=>{
@@ -144,7 +147,8 @@ setClod(true)
   let subAll=okk.reduce((total,items)=>total+items.qty*items.price,0)
      const newOrder={order:okk,subTotal:subAll,userDetails:userData}
    
-    const res=await axios.put(`http://localhost:3000/products/orders/${id}`,newOrder)
+    const res=await callIslogin({action:"put",url:"https://ecommerce-app-5dnf.onrender.com/products/orders",data:newOrder,id:id})
+    
   localStorage.setItem("cart",JSON.stringify(test))
      
    }catch(error){
@@ -154,7 +158,7 @@ setClod(true)
   
   const deleteOrder=async()=>{
     try{
-      const res=await axios.delete(`http://localhost:3000/products/orders/${id}`)
+      const res=await callIslogin({action:"delete",url:"https://ecommerce-app-5dnf.onrender.com/products/orders",id:id})
       console.log(res.data)
       navigate("/orders")
   // await FindOrder()

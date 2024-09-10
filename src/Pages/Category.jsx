@@ -10,6 +10,8 @@ import { ImSpinner3 } from "react-icons/im";
 import { MdAddLink } from "react-icons/md";
 import Paginations from "../Pages/Paginations.jsx";
 
+import {setLs,RemoveLs,getLs,callIslogin} from "../Helper/HelperLs.jsx";
+
 import toast,{Toaster} from 'react-hot-toast';
 import axios from 'axios'
 import "../Components/Op.css"
@@ -48,7 +50,7 @@ export default function Category(){
         
  const callUser=async()=>{
     try{
-      const res=await axios.get('http://localhost:3000/products/islogin')
+      const res=await callIslogin({action:"get",url:"https://ecommerce-app-5dnf.onrender.com/products/islogin"})
       await setUserData({...res.data.userInfo})
      
     }catch(error){
@@ -65,7 +67,11 @@ export default function Category(){
  const numberOfProducts=async(val)=>{
     try{
       //setSearch(val.name)
-    const res=await axios.get(`http://localhost:3000/products/app?page=${currentPage}&&search=${val.name}`)
+    const res=await axios.get(`https://ecommerce-app-5dnf.onrender.com/products/app?page=${currentPage}&&search=${val.name}`,{
+      headers:{
+       "Authorization": `Bearer ${getLs("loginToken")}`
+        }
+    })
     console.log(res.data.actualTotal)
     if(val.name === "All"){
    return await setTotalProduct(res.data.actualTotal)
@@ -78,7 +84,11 @@ export default function Category(){
   }    
   const callApi=async()=>{
     try{
-      const res=await axios.get(`http://localhost:3000/products/category?limit=5&&page=${currentPage}&&search=${search}`)
+      const res=await axios.get(`https://ecommerce-app-5dnf.onrender.com/products/category?limit=5&&page=${currentPage}&&search=${search}`,{
+        headers:{
+       "Authorization": `Bearer ${getLs("loginToken")}`
+        }
+      })
    setClod(true)
      await setData(res.data.allCategory)
      await setTotalPage(res.data.totalPage)
@@ -111,7 +121,8 @@ export default function Category(){
  formData.append("name",name)
  formData.append("image",simage)
    
-     const res=await axios.post("http://localhost:3000/products/createCategory",formData)
+     const res=await callIslogin({action:"post",url:"https://ecommerce-app-5dnf.onrender.com/products/createCategory",data:formData})
+     
    const newData= await res.data
      await setData([...data,newData])
      setName("")
@@ -135,7 +146,7 @@ export default function Category(){
   
   const deleteCategory=async(id)=>{
     try{
-      const res=await axios.delete(`http://localhost:3000/products/category/${id}`)
+      const res=await callIslogin({action:"delete",url:"https://ecommerce-app-5dnf.onrender.com/products/category",id:id})
       toast.success(res.data.message)
       
     }catch(error){
@@ -147,7 +158,7 @@ export default function Category(){
   const editById =async(id)=>{
     try{
       setUpdate({cond:true,id:id})
-      const res=await axios.get(`http://localhost:3000/products/singlecategory/${id}`)
+      const res=await callIslogin({action:"get",url:"https://ecommerce-app-5dnf.onrender.com/products/singlecategory",id:id})
       const data=await res.data.singleCategory
       await setSimage(data.image)
      setName(data.name)
@@ -190,7 +201,7 @@ export default function Category(){
     
 
     
-      const res=await axios.put(`http://localhost:3000/products/category/${update.id}`,formData)
+      const res=await callIslogin({action:"put",url:"https://ecommerce-app-5dnf.onrender.com/products/category",data:formData,id:update.id})
       
       setUpdate({cond:false,id:""})
     setImage("")
@@ -271,11 +282,19 @@ if(val.name==="All"){
         {
           data?.map((val,index)=>{
           const {_id,name,image}=val
+<<<<<<< HEAD
             return <div className="w-[90%] md:w-[75%] md:mb-3 odd:bg-emerald-200 even:bg-pink-200 mx-auto border-s-4 border-s-orange-500 rounded-r-3xl shadow-[8px_5px_3px_rgba(92,80,58,0.868)]">
               <ul className="flex gap-1 justify-between items-center text-black p-3">
              <li> <img src={val.image} className="w-[35px] h-[35px] md:w-[50px] md:h-[50px] rounded-3xl my-[-5px]" /></li>
           
                 <li className="underline" onClick={()=>{numberOfProducts(val);setShowModal(true);setModalData({...val})}}>{val._id.slice(-9)}</li>
+=======
+            return <div className="w-[90%] odd:bg-emerald-200 even:bg-pink-200 mx-auto border-s-4 border-s-orange-500 rounded-r-3xl shadow-[8px_5px_3px_rgba(92,80,58,0.868)]">
+              <ul className="flex gap-1 justify-between text-black p-3">
+             <li> <img src={val.image} className="w-[35px] h-[35px] rounded-3xl my-[-5px]" /></li>
+          
+                <li className="underline text-blue-700" onClick={()=>{numberOfProducts(val);setShowModal(true);setModalData({...val})}}>{val._id.slice(-9)}</li>
+>>>>>>> origin/main
                 <li>{val.name}</li>
                 <li onClick={()=>editById(val._id)} className="text-blue-800 font-bold">Edit</li>
             <li onClick={()=>deleteCategory(val._id)} className="text-red-900 font-bold"> Delete</li>

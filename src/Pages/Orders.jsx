@@ -10,6 +10,7 @@ import toast,{Toaster} from 'react-hot-toast';
 //import 'react-toastify/dist/ReactToastify.css';
 import { ImSpinner3 } from "react-icons/im";
 import Paginations from "../Pages/Paginations.jsx"
+import {setLs,RemoveLs,getLs,callIslogin} from "../Helper/HelperLs.jsx";
 
 import "../Components/Op.css"
 
@@ -41,7 +42,7 @@ const handleSearch=(e)=>{
 
   const callApi=async()=>{
     try{
-      const res=await axios.get('http://localhost:3000/products/islogin')
+      const res=await callIslogin({action:"get",url:"https://ecommerce-app-5dnf.onrender.com/products/islogin"})
       await setUserData({...res.data.userInfo})
     }catch(error){
       console.log(error)
@@ -49,7 +50,7 @@ const handleSearch=(e)=>{
     }
   const findUser=async()=>{
     try{
-      const userRes=await axios.get('http://localhost:3000/products/islogin')
+      const userRes=await callIslogin({action:"get",url:"https://ecommerce-app-5dnf.onrender.com/products/islogin"})
       await setUserData({...userRes.data.userInfo})
       await setID(userRes.data.userInfo.id)
 
@@ -60,7 +61,7 @@ const handleSearch=(e)=>{
 
   const deleteOrder=async(id)=>{
     try{
-      const res=await axios.delete(`http://localhost:3000/products/orders/${id}`)
+      const res=await callIslogin({action:"delete",url:"https://ecommerce-app-5dnf.onrender.com/products/orders",id:id}) 
      await getOrder()
      toast.success(res.data.message)
     }catch(error){
@@ -72,7 +73,11 @@ const handleSearch=(e)=>{
   const getOrder=async()=>{
     try{
       
-   const res=await axios.get(`http://localhost:3000/products/orders?page=${currentPage}&&search=${search}`)
+   const res=await axios.get(`https://ecommerce-app-5dnf.onrender.com/products/orders?page=${currentPage}&&search=${search}`,{
+      headers: {
+        "Authorization": `Bearer ${getLs("loginToken")}`
+        }
+   })
    await setOrderData(res.data.allOrder)
    await setTotalPage(res.data.totalPage)
    setClod(true)

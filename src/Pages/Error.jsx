@@ -3,6 +3,8 @@ import React,{useEffect} from "react"
 import {useLocation,useNavigate} from "react-router-dom"
 import {useDispatch,useSelector } from "react-redux";
 import {setNavi,setSideBar} from "../Components/EcomReducer.jsx";
+import {setLs,RemoveLs,getLs,callIslogin} from "../Helper/HelperLs.jsx";
+
 import axios from "axios"
 export default function Error(){
   const { pathname } = useLocation();
@@ -11,7 +13,7 @@ export default function Error(){
   
   const callApi=async()=>{
     try{
-      const res=await axios.get('http://localhost:3000/products/islogin')
+      const res=await callIslogin({action:"get",url:"https://ecommerce-app-5dnf.onrender.com/products/islogin"})
       console.log(res.data)
     }catch(error){
       console.log(error)

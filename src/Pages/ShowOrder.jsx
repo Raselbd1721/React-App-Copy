@@ -4,6 +4,8 @@ import {useLocation,useNavigate} from "react-router-dom"
 import {useDispatch,useSelector } from "react-redux";
 import LoadingPage from "../Pages/LoadingPage.jsx"
 import {setNavi,setLogin,setLoadings} from "../Components/EcomReducer.jsx";
+import {setLs,RemoveLs,getLs,callIslogin} from "../Helper/HelperLs.jsx";
+
 import "../Components/Op.css"
 import axios from "axios"
 export default function ShowOrder(){
@@ -18,7 +20,7 @@ const dispatch=useDispatch()
   
    const callApi=async()=>{
     try{
-      const res=await axios.get('http://localhost:3000/products/islogin')
+      const res=await callIslogin({action:"get",url:"https://ecommerce-app-5dnf.onrender.com/products/islogin"})
       console.log(res.data)
       //dispatch(setLoadings(false))
       setClod(true)

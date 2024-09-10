@@ -1,4 +1,5 @@
 
+import React,{useState,useEffect} from "react"
 import { createSlice } from '@reduxjs/toolkit'
 
 const getCart=localStorage.getItem("cartItems")!==null ? JSON.parse(localStorage.getItem("cartItems")) : []
@@ -6,6 +7,10 @@ const getCart=localStorage.getItem("cartItems")!==null ? JSON.parse(localStorage
 const setStorage=(val)=>{
   localStorage.setItem("cartItems",JSON.stringify(val))
 }
+
+
+
+//const [data,setData]=useState("hello")
 
 const initialState = { 
   category:"",
