@@ -89,7 +89,7 @@ const handleSearch=(e)=>{
   },[currentPage,search])
   
   return clod &&(
-    <div className="mx-2 max-w-[400px] box-border bg-gray-200 py-5 mt-14 text-center font-serif pb-10">
+    <div className="mx-2 box-border bg-gray-200 py-5 mt-14 text-center font-serif pb-10">
       <h1 className="mb-5 font-bold">this is Orders page</h1>
       <div className="text-center border-2 border-blue-600 border-solid rounded-3xl  shadow-[3px_5px_5px_gray] transform transition ease-in-out duration-500 hover:scale-110 w-[330px] mx-auto">
       <form onSubmit={handleSub}>
@@ -102,8 +102,8 @@ const handleSearch=(e)=>{
         {
           orderData?.map((val,index)=>{
           const {_id,subTotal,order,userDetails,invoice}=val
-            return <div key={_id} className="w-[95%] odd:bg-emerald-200 even:bg-pink-200 mx-auto border-s-4 border-s-orange-500 rounded-r-3xl shadow-[8px_5px_3px_rgba(92,80,58,0.868)]">
-              <ul className="flex gap-5 justify-center text-black p-3">
+            return <div key={_id} className="w-[95%] md:w-[60%] odd:bg-emerald-200 even:bg-pink-200 mx-auto border-s-4 border-s-orange-500 rounded-r-3xl shadow-[8px_5px_3px_rgba(92,80,58,0.868)] md:mb-3">
+              <ul className="flex gap-5 justify-center md:justify-between text-black p-3 md:px-5">
             {userData.role==="admin" ? <div className="flex gap-5">
                <li>{invoice.slice(-6)}</li>
    <li>{userDetails.email.substring(0,4)+"..."}</li></div> : <div className="flex gap-5"><li>{index+1}</li>

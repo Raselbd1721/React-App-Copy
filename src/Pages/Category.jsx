@@ -223,7 +223,7 @@ if(val.name==="All"){
   },[search,currentPage])
   
   return userData.role&&(
-    <div className={`${data.length > 0 ? "mx-2 max-w-[400px] box-border bg-gray-200 py-5 mt-14 text-center font-serif pb-24":"mx-2 max-w-[400px] box-border bg-gray-200 mt-14 text-center font-serif pb-6"}`}>
+    <div className={`${data.length > 0 ? "mx-2 box-border bg-gray-200 py-5 mt-14 text-center font-serif pb-24":"mx-2 box-border bg-gray-200 mt-14 text-center font-serif pb-6"}`}>
             <h1 className="mb-4 font-bold">this is category page</h1>
       
       <div className="my-1">
@@ -271,11 +271,11 @@ if(val.name==="All"){
         {
           data?.map((val,index)=>{
           const {_id,name,image}=val
-            return <div className="w-[90%] odd:bg-emerald-200 even:bg-pink-200 mx-auto border-s-4 border-s-orange-500 rounded-r-3xl shadow-[8px_5px_3px_rgba(92,80,58,0.868)]" onClick={()=>{numberOfProducts(val);setShowModal(true);setModalData({...val})}}>
-              <ul className="flex gap-1 justify-between text-black p-3">
-             <li> <img src={val.image} className="w-[35px] h-[35px] rounded-3xl my-[-5px]" /></li>
+            return <div className="w-[90%] md:w-[75%] md:mb-3 odd:bg-emerald-200 even:bg-pink-200 mx-auto border-s-4 border-s-orange-500 rounded-r-3xl shadow-[8px_5px_3px_rgba(92,80,58,0.868)]">
+              <ul className="flex gap-1 justify-between items-center text-black p-3">
+             <li> <img src={val.image} className="w-[35px] h-[35px] md:w-[50px] md:h-[50px] rounded-3xl my-[-5px]" /></li>
           
-                <li className="underline">{val._id.slice(-9)}</li>
+                <li className="underline" onClick={()=>{numberOfProducts(val);setShowModal(true);setModalData({...val})}}>{val._id.slice(-9)}</li>
                 <li>{val.name}</li>
                 <li onClick={()=>editById(val._id)} className="text-blue-800 font-bold">Edit</li>
             <li onClick={()=>deleteCategory(val._id)} className="text-red-900 font-bold"> Delete</li>
@@ -288,22 +288,22 @@ if(val.name==="All"){
 
         }
       </div>
-      </div>:<div className="w-full h-full flex flex-wrap gap-2 justify-center items-center mt-8 mb-6">
+      </div>:<div className="w-full h-full flex flex-wrap gap-2 md:gap-4 justify-center items-center mt-8 mb-6">
         {
           data?.map((val,index)=>{
           const {_id,name,image}=val
           
-           return <div key={index} className="bg-amber-400 w-[30%]  mb-3 rounded-2xl pb-5" onClick={()=>showItems(val)}>
-             <p>{val.name}</p>
-        <img src={val.image} className="w-full h-36" alt={val.name}/>
+           return <div key={index} className="bg-amber-400 w-[30%] md:mb-5 mb-3 rounded-2xl pb-5 md:pb-8" onClick={()=>showItems(val)}>
+             <p className="md:py-1.5">{val.name}</p>
+        <img src={val.image} className="w-full h-36 md:h-52" alt={val.name}/>
         
            </div>
           })
         }
       </div>}
-          { showModal && <div ref={setRef} onClick={(e)=>closeMoal(e)} className=" text-center font-serif w-[400px] backdrop-blur-md fixed inset-0 z-20 h-full flex justify-center items-center mt-14" >
-<div className="w-[400px] h-fit mb-32">
-      <div className="text-center py-1 border-2 border-blue-600 border-solid rounded-3xl bg-gray-100 mb-4 shadow-[3px_5px_5px_gray] transform transition ease-in-out duration-500 hover:scale-110 w-[330px] h-[340px] mx-auto">
+          { showModal && <div ref={setRef} onClick={(e)=>closeMoal(e)} className=" text-center font-serif backdrop-blur-md fixed inset-0 z-20 h-full flex justify-center items-center mt-14" >
+<div className="w-[400px] md:w-[550px] h-fit mb-32">
+      <div className="text-center py-1 border-2 border-blue-600 border-solid rounded-3xl bg-gray-100 mb-4 shadow-[3px_5px_5px_gray] transform transition ease-in-out duration-500 hover:scale-110 w-[330px] h-[340px] md:w-[500px] md:h-[400px] mx-auto">
        <div className="flex justify-end m-1">
       <RxCrossCircled onClick={()=>setShowModal(false)} className="bg-pink-600 text-white text-3xl rounded-3xl" /></div>
       

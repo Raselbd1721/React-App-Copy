@@ -58,7 +58,8 @@ dispatch(setCartNumber(true))
   
 //if(navi){
   return(
-    <div className="grid grid-col-5 grid-flow-col py-3 bg-blue-400 mt-1 text-center w-[395px] rounded-3xl fixed z-20 box-border h-12">
+    <div className="fixed z-20 w-full pt-1">
+    <div className="grid grid-col-5 grid-flow-col py-3 bg-blue-400 text-center rounded-3xl box-border mx-3 md:mx-5 h-12">
         <div className="col-span-1 px-2">
          {(cartNumber && data.role) ? <h1 className="">{data.role==="admin" ? "Ad..("+data.email.substring(0,4)+")" : "User("+data.email.substring(0,4)+")"}</h1>:"R@hopE"}
         </div>
@@ -76,11 +77,11 @@ dispatch(setCartNumber(true))
         </ul>
         </div>
       
-    <div className="col-span-5 flex gap-3 flex-row text-pink-600 p-1 relative">
+    <div className="col-span-5 flex gap-3 flex-row text-pink-600 p-1">
        <Link to="/cart"> 
        <div className={ menu=== "cart" ? "test px-1" : "px-1"}>
         {cartNumber&&cartData?.length > 0 ? 
-        <p className="absolute bg-yellow-600 w-5 h-5 rounded-[50%] top-[-9px] right-[70px] text-white content-center animate-bounce">{cartData.length}</p> :""}
+        <p className="absolute bg-yellow-600 w-6 h-[23px] content-center rounded-[45%] text-white mt-[-13px] ml-[-18px] animate-bounce">{cartData.length}</p> :""}
        
          {cartNumber&&cartData.length > 0 ? 
         <FaShoppingCart className="animate-ping w-5 h-5" /> : <FaShoppingCart className="pb-1 w-5 h-5 " /> }
@@ -98,7 +99,7 @@ dispatch(setCartNumber(true))
 
     </div>
     </div>
-    
+    </div>
     
 
    

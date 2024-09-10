@@ -67,16 +67,16 @@ const [first,setFirst]=useState(false)
  
   
   return clod &&(
-    <div className="mx-2 max-w-[100%] box-border bg-gray-200 py-5 mt-14 text-center font-serif pb-20">
+    <div className="mx-2 box-border bg-gray-200 py-5 mt-14 text-center font-serif pb-20">
         { cartData.length > 0 ? <h1>HERE IS YOUR ALL CART ITEMS</h1> : <h1 className="animate-pulse">THE CART IS EMPTY</h1>}
-    <div className="cae grid gap-3 p-5 px-2">
+    <div className="cae grid gap-3 p-5 px-2 md:w-[75%] md:mx-auto">
         {
         cartData?.map((val,index)=>{
-            return <div key={index} className={val._id === Active ? "translate-x-[400px] duration-[1.2s] ease-out grid grid-cols-4" : " grid grid-cols-4 bg-pink-600 rounded-3xl"}>
+            return <div key={index} className={val._id === Active ? "translate-x-[400px] duration-[1.2s] ease-out grid grid-cols-4 md:mb-3" : " grid grid-cols-4 bg-pink-600 rounded-3xl md:mb-3"}>
          <div className="col-span-2 flex gap-4 ">
-           <img src={val.image} className="w-20 h-20 rounded-3xl" />
+           <img src={val.image} className="w-20 h-20 md:w-32 md:h-32 rounded-3xl" />
            <div className="content-center uppercase font-bold font-serif">
-           <ul className="text-[10px] space-y-1 text-white">
+           <ul className="text-[10px] space-y-1 text-white md:text-3xl">
              <li>{val.name}</li>
              <li>{val.category}</li>
              <li>{val.price}</li>
@@ -84,14 +84,14 @@ const [first,setFirst]=useState(false)
          </div>
          </div>
          
-         <div className="flex items-center gap-1.5 text-center">
-          <CiCirclePlus onClick={()=>dispatch(incQty({id:val._id,userId:userData.id}))} className="text-2xl" />
-           <p className="w-7 h-7 border-amber-500
-           border-2 border-solid bg-white rounded-3xl text-[13px] content-center">{val.qty}</p>
-           <CiCircleMinus onClick={()=> val.qty > 1 ? dispatch(decQty({id:val._id,userId:userData.id})) : removeItems(val,index)} className="text-2xl" />
+         <div className="flex items-center gap-1.5 text-center md:text-3xl md:gap-3">
+          <CiCirclePlus onClick={()=>dispatch(incQty({id:val._id,userId:userData.id}))} className="text-2xl md:text-3xl" />
+           <p className="w-7 h-7 md:w-10 md:h-10 border-amber-500
+           border-2 border-solid bg-white rounded-3xl md:text-2xl text-[13px] content-center">{val.qty}</p>
+           <CiCircleMinus onClick={()=> val.qty > 1 ? dispatch(decQty({id:val._id,userId:userData.id})) : removeItems(val,index)} className="text-2xl md:text-3xl" />
           </div>
          
-         <div className="flex items-center gap-3 justify-end px-3 text-2xl">
+         <div className="flex items-center gap-3 justify-end px-3 text-2xl md:text-3xl md:px-5">
           <div>
          <p>{val.qty * val.price}</p>
          </div>
@@ -105,7 +105,7 @@ const [first,setFirst]=useState(false)
       </div>
     {cartData.length > 0 ? <div>
     <div>
-      <hr className=" border-b-0 border-[8px] border-amber-900 w-[94%] mx-auto rounded-3xl"/>
+      <hr className=" border-b-0 border-[8px] border-amber-900 w-[94%] md:w-[85%] mx-auto rounded-3xl"/>
       </div>
       <div className="grid grid-cols-3 gap-3 py-3 items-center">
       <div className="col-span-2 text-right text-2xl">

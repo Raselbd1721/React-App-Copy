@@ -150,7 +150,7 @@ findUser()
   },[currentPage,search])
   
   return userRole.role &&(
-<div className={`${data.length > 0 ? "mx-2 max-w-[400px] box-border bg-gray-200 py-5 mt-14 text-center font-serif pb-10" : "mx-2 max-w-[400px] box-border bg-gray-200 mt-14 text-center font-serif pb-4"}`}>
+<div className={`${data.length > 0 ? "mx-2 md:mx-5 box-border bg-gray-200 py-5 mt-14 text-center font-serif pb-10" : "mx-2 box-border bg-gray-200 mt-14 text-center md:mx-4 font-serif pb-4"}`}>
       <h1>this is Product page</h1>
       <div className="my-1">
         <input type="text" placeholder="Category Search here" name="search" className="p-2 border-2 border-solid hover:border-pink-600 outline-none rounded-lg mb-2 w-[75%]" value={todo} onChange={(e)=>{handleSearch(e)}} required/>
@@ -170,7 +170,7 @@ findUser()
         </div>
 }
 <div className="">
-  <div className={`${formCon ? "text-center border-2 border-blue-600 border-solid rounded-3xl bg-gray-100 shadow-[3px_5px_5px_gray] transform transition ease-in duration-500 hover:scale-110 w-[330px] mx-auto px-1 mt-10 mb-7 formAnimation overflow-scroll" : "text-center border-2 border-blue-600 border-solid rounded-3xl bg-gray-100 shadow-[3px_5px_5px_gray] transform transition ease-in duration-500 hover:scale-110 w-[330px] mx-auto px-1 mt-10 mb-7 formAnimOut " }`}>
+  <div className={`${formCon ? "text-center border-2 border-blue-600 border-solid rounded-3xl bg-gray-100 shadow-[3px_5px_5px_gray] transform transition ease-in duration-500 hover:scale-110 w-[330px] md:w-[600px] mx-auto px-1 mt-10 mb-7 formAnimation overflow-scroll" : "text-center border-2 border-blue-600 border-solid rounded-3xl bg-gray-100 shadow-[3px_5px_5px_gray] transform transition ease-in duration-500 hover:scale-110 w-[330px] md:w-[600px] mx-auto px-1 mt-10 mb-7 formAnimOut " }`}>
        <div className="flex justify-end m-1">
        <RxCrossCircled className="bg-pink-600 text-white text-3xl rounded-3xl" onClick={()=>setFormCon(false)} /></div>
               <div className="flex justify-end text-4xl">
@@ -226,9 +226,9 @@ findUser()
         {
           data?.map((val,index)=>{
           const {_id,name,image}=val
-            return <div className="w-[90%] odd:bg-emerald-200 even:bg-pink-200 mx-auto border-s-4 border-s-orange-500 rounded-r-3xl shadow-[8px_5px_3px_rgba(92,80,58,0.868)]">
-              <ul className="flex gap-1 justify-between text-black p-3">
-             <li> <img src={val.image} className="w-[35px] h-[35px] rounded-3xl my-[-6px]" /></li>
+            return <div className="w-[90%] md:w-[75%] md:mb-3 odd:bg-emerald-200 even:bg-pink-200 mx-auto border-s-4 border-s-orange-500 rounded-r-3xl shadow-[8px_5px_3px_rgba(92,80,58,0.868)]">
+              <ul className="flex gap-1 justify-between items-center text-black p-3">
+             <li> <img src={val.image} className="w-[35px] h-[35px] md:h-[50px] md:w-[50px] rounded-3xl my-[-6px]" /></li>
           
                 <li>{val._id?.slice(-9)}</li>
                 <li className="font-bold">{val.name?.split(" ")?.slice(0,2)?.join(" ")}</li>
@@ -247,10 +247,10 @@ findUser()
         }
       </div>
       
-      </div> : <div className="w-full h-full flex flex-wrap gap-2 justify-center items-center mt-8 mb-20">
+      </div> : <div className="w-full h-full flex flex-wrap gap-2 md:gap-3 justify-center items-center mt-8 mb-20">
         {
           data.map((val,index)=>{
-           return <div key={index} className="bg-amber-400 w-[30%]  mb-3 rounded-2xl" onClick={()=>{setModalData({...val});setShowModal(true)}}>
+           return <div key={index} className="bg-amber-400 w-[45%] md:w-[30%] mb-3 md:mx-2 mx-1 rounded-2xl" onClick={()=>{setModalData({...val});setShowModal(true)}}>
              <p>{val.name}</p>
         <img src={val.image} className="w-full h-36" alt={val.name}/>
         <p>Price → {val.price}</p>
@@ -259,9 +259,9 @@ findUser()
         }
       </div>
 }
-    { showModal && <div ref={setRef} onClick={(e)=>closeMoal(e)} className=" text-center font-serif w-[400px] backdrop-blur-md fixed inset-0 z-20 h-full flex justify-center items-center mt-14" >
-<div className="w-[400px] h-fit mb-32">
-      <div className="text-center py-1 border-2 border-blue-600 border-solid rounded-3xl bg-gray-100 mb-4 shadow-[3px_5px_5px_gray] transform transition ease-in-out duration-500 hover:scale-110 w-[330px] h-[375px] mx-auto">
+    { showModal && <div ref={setRef} onClick={(e)=>closeMoal(e)} className=" text-center font-serif w-full backdrop-blur-md fixed inset-0 z-10 h-full flex justify-center items-center" >
+<div className="w-full h-fit mb-32">
+      <div className="text-center py-1 border-2 border-blue-600 border-solid rounded-3xl bg-gray-100 mb-4 shadow-[3px_5px_5px_gray] transform transition ease-in-out duration-500 hover:scale-110 w-[330px] md:w-[600px] md:h-[450px] h-[375px] mx-auto">
        <div className="flex justify-end m-1">
       <RxCrossCircled onClick={()=>setShowModal(false)} className="bg-pink-600 text-white text-3xl rounded-3xl" /></div>
       

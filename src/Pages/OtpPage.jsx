@@ -31,6 +31,7 @@ toast.error(error.response.data.message)
 const handleSubmit=async(e)=>{
  try{
   e.preventDefault()
+  
    const res=await axios.post("http://localhost:3000/products/checkotp",{secretKey})
    await toast.success(res.data.message)
    await navigate("/users")

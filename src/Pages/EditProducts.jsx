@@ -85,11 +85,11 @@ export default function EditProducts(){
   },[])
   
   return(
-    <div className="mx-2 max-w-[400px] box-border bg-gray-200 py-5 mt-14 text-center font-serif pb-10 text-center">
+    <div className="mx-2 box-border bg-gray-200 py-5 mt-14 text-center font-serif pb-10 text-center">
       <h1>this is Edit Product page</h1>
       <h1>Product ID: {_id}</h1>
   <div className="">
-  <div className="text-center border-2 border-blue-600 border-solid rounded-3xl bg-gray-100 shadow-[3px_5px_5px_gray] transform transition ease-in duration-500 hover:scale-110 w-[330px] mx-auto px-1 mt-10 mb-7">
+  <div className="text-center border-2 border-blue-600 border-solid rounded-3xl bg-gray-100 shadow-[3px_5px_5px_gray] transform transition ease-in duration-500 hover:scale-110 w-[330px] md:w-[450px] mx-auto px-1 mt-10 mb-7">
 
               <h1 className="text-3xl text-center text-amber-600 pb-4">Product Data</h1>
 <form onSubmit={updateCategory}>
@@ -98,7 +98,7 @@ export default function EditProducts(){
         <label className="top-[-3px] left-1 absolute text-green-900 font-bold" for="description">*Product</label>
       <input type="text" placeholder="Product name" name="product" className="p-2 border-2 border-solid border-gray-200 outline-none rounded-lg mb-2 w-[66%] hover:border-pink-600" required value={singlePro.name} onChange={(e)=>setSinglePro({...singlePro,name:e.target.value})} />
    
-       <label className="top-[-3px] right-12 absolute text-green-900 font-bold" for="price">*Price</label>
+       <label className="top-[-3px] right-12 md:right-20 absolute text-green-900 font-bold" for="price">*Price</label>
       <input type="number" placeholder="price" name="price" className="p-2 border-2 border-solid border-gray-200 outline-none rounded-lg mb-2 w-[32%] hover:border-pink-600" required 
       value={singlePro.price > 0 && singlePro.price} onChange={(e)=>setSinglePro({...singlePro,price:e.target.value})} />
       </div>

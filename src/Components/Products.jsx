@@ -64,7 +64,7 @@ const SelRef=useRef()
         return val.category.toLowerCase()===allCategory.category.toLowerCase()
         }
       })
-      */
+*/
       
 const addCart=(val)=>{
   dispatch(addToCart({...val,userId:userData.id}))
@@ -95,15 +95,17 @@ const callUser=async()=>{
   
   return(
   
-    <div className="py-6 flex flex-col gap-8 justify-center items-center max-w-[400px] mb-20">
-
-<div> {myToast&& <CustomToastSuccess />}</div>
-      {
-/* <CustomToast val={current} />*/
-   data=="" ? <div>This Item not found</div> : data?.map((val)=>{
-    return <div key={val._id} className="w-[360px] h-[360px] bg-blue-200 text-center overflow-hidden rounded-2xl font-serif pb-12 transition transform ease-in-out duration-1000 hover:scale-110 shadow-[8px_5px_3px_rgba(92,80,58,0.868)]">
+   <div className="py-6 mb-20 grid place-items-center">
+ 
+  {
+  /* <CustomToast val={current} />*/
+   data=="" ? <div>This Item not found</div> :
+   <div className="px-5 md:px-3 md:mt-16 w-full h-full flex flex-wrap gap-8 justify-center items-center">{
+   data?.map((val)=>{
+   
+    return <div key={val._id} className="bg-blue-200 text-center overflow-hidden rounded-2xl font-serif pb-12 transition transform ease-in-out duration-1000 hover:scale-110 shadow-[8px_5px_3px_rgba(92,80,58,0.868)] w-full md:w-[30%] xl:w-[22%] md:mt-8">
               <p className="mt-1 text-2xl text-[rgb(207,56,29)]">{val.desc}</p>
-            <div className=" w-[100%] h-[62%] content-center">
+            <div className="content-center">
 
               <img src={val.image} className="w-[280px] h-[180px] rounded-2xl mx-auto"/>
             </div>
@@ -118,10 +120,16 @@ const callUser=async()=>{
           </div>
   
           </div>
+          
   })
-
-      }
-     { data.length > 0 ? <Paginations currentPage={currentPage} setCurrentPage={setCurrentPage} totalPage={totalPage} /> : <span className="animate-spin text-4xl text-pink-500"><ImSpinner3 /></span>}
+  
+      } </div>
+       }
+       
+       
+   { data.length > 0 ? <Paginations currentPage={currentPage} setCurrentPage={setCurrentPage} totalPage={totalPage} /> : <span className="animate-spin text-4xl text-pink-500"><ImSpinner3 /></span>
+     }
+     
       
       {/*
        main.map(bal=>(
@@ -134,6 +142,8 @@ const callUser=async()=>{
         })}
        </div>) )  
       */}
+  {myToast&& <CustomToastSuccess />}
+ 
  </div>
  
     )

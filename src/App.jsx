@@ -36,8 +36,8 @@ toast.error(error.response.data.message)
   },[])
   
   return(
-<div>{isLoading && <LoadingPage isLoading={isLoading} />}
-    <div className="mx-2 max-w-[100%] box-border bg-gray-200 pb-5">
+<div className="w-full">{isLoading && <LoadingPage isLoading={isLoading} />}
+    <div className="mx-2 box-border bg-gray-200 pb-5">
      
   <SearchBar />
 

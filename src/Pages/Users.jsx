@@ -168,7 +168,7 @@ const editUser=(val)=>{
     
   },[currentPage,search])
   return userRole.role&&(
-        <div className="mx-2 max-w-[400px] box-border bg-gray-200 py-5 mt-14 text-center font-serif pb-10">
+        <div className="mx-2 box-border bg-gray-200 py-5 mt-14 text-center font-serif pb-10">
      <h1 className="mb-5">this is {userRole.role} Page</h1>
     <div className="my-1">
         <input type="text" placeholder="Users Search here" name="search" className="p-2 border-2 border-solid hover:border-pink-600 outline-none rounded-lg mb-2 w-[75%]" value={todo} onChange={(e)=>handleSearch(e)} required/>
@@ -219,12 +219,12 @@ const editUser=(val)=>{
         <option value="false">Deactivate</option>
       </select>
       </div>
-       <div className="mt-2 flex flex-col gap-4 py-6 justify-between mb-20" >
+       <div className="mt-2 flex flex-col gap-4 py-6 justify-between mb-20 md:w-[70%] md:mx-auto" >
          
         {
           data?.map((val,index)=>{
           const {_id,email,isActive}=val
-            return <div key={_id} className="w-[95%] odd:bg-emerald-200 even:bg-pink-200 mx-auto border-s-4 border-s-orange-500 rounded-r-3xl shadow-[8px_5px_3px_rgba(92,80,58,0.868)]">
+            return <div key={_id} className="w-[95%] md:px-3 md:py-1 md:mb-3 odd:bg-emerald-200 even:bg-pink-200 mx-auto border-s-4 border-s-orange-500 rounded-r-3xl shadow-[8px_5px_3px_rgba(92,80,58,0.868)]">
               <ul className="flex gap-1 justify-between items-center text-black p-2">
            { /* <li> <img src={val.image} className="w-[35px] h-[35px] rounded-3xl my-[-6px]" /></li>*/}
           
@@ -267,7 +267,7 @@ const editUser=(val)=>{
       
   {data?.map((val,index)=>{
           const {_id,email}=val
-            return <div key={_id} className="w-[95%] odd:bg-emerald-200 even:bg-pink-200 mx-auto border-s-4 border-s-orange-500 rounded-r-3xl shadow-[8px_5px_3px_rgba(92,80,58,0.868)]">
+            return <div key={_id} className="w-[95%] md:w-[70%] odd:bg-emerald-200 even:bg-pink-200 mx-auto border-s-4 border-s-orange-500 rounded-r-3xl shadow-[8px_5px_3px_rgba(92,80,58,0.868)] md:mt-3 md:px-3 md:py-1 md:mx-auto">
               <ul className="flex gap-1 justify-between text-black p-3">
            { /* <li> <img src={val.image} className="w-[35px] h-[35px] rounded-3xl my-[-6px]" /></li>*/}
           
@@ -285,14 +285,14 @@ const editUser=(val)=>{
           })
         }</div>}
         
-    { showModal && <div ref={setRef} onClick={(e)=>closeMoal(e)} className=" text-center font-serif w-[400px] backdrop-blur-md fixed inset-0 z-20 h-full flex justify-center items-center mt-14" >
-<div className="w-[400px] h-fit mb-72">
-      <div className="text-center py-1 border-2 border-blue-600 border-solid rounded-3xl bg-gray-100 mb-4 shadow-[3px_5px_5px_gray] transform transition ease-in-out duration-500 hover:scale-110 w-[330px] mx-auto">
+    { showModal && <div ref={setRef} onClick={(e)=>closeMoal(e)} className=" text-center font-serif backdrop-blur-md fixed inset-0 z-20 h-full flex justify-center items-center mt-14" >
+<div className="w-[400px] md:w-[550px] h-fit mb-72">
+      <div className="text-center py-1 border-2 border-blue-600 border-solid rounded-3xl bg-gray-100 mb-4 shadow-[3px_5px_5px_gray] transform transition ease-in-out duration-500 hover:scale-110 w-[330px] ms:w-[500px] md:h-[250px] mx-auto">
        <div className="flex justify-end m-1">
       <RxCrossCircled onClick={()=>setShowModal(false)} className="bg-pink-600 text-white text-3xl rounded-3xl" /></div>
       
        <h1 className="text-2xl text-center text-amber-600 pb-4 mt-[-20px] underline">User information</h1>
-     <div className="pb-8 font-bold text-emerald-950 ">
+     <div className="pb-8 md:mt-8 font-bold text-emerald-950 ">
       <h1>User Email → {modalData.email}</h1>
        <h1>User Role → {modalData.role}</h1>
        
